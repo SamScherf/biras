@@ -7,8 +7,7 @@ Simply run:
 
 	biras scale
 
-and enter the requested parameters to scale up and smooth out an image. The file will
-then be saved to your current working directory with the name "output.png"
+and enter the requested parameters to scale up and smooth out your image(s)
 
 ## Plans
 
