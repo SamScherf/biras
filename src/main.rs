@@ -4,7 +4,7 @@ use image::GenericImageView;
 use clap::App;
 
 
-fn scale_image(image_path: String, scale: u32, sample_size: u32) -> image::ImageBuffer<image::Rgb<u8>, std::vec::Vec<u8>> {
+fn scale_image(image_path: &str, scale: u32, sample_size: u32) -> image::ImageBuffer<image::Rgb<u8>, std::vec::Vec<u8>> {
 
     // Open image
     let orginal_image = image::open(image_path).unwrap();
@@ -37,12 +37,24 @@ fn main() {
         // Get parameter values
         let scale_factor = scale_matches.value_of("scale").unwrap().parse::<u32>().unwrap();
         let sample_size = scale_matches.value_of("median").unwrap().parse::<u32>().unwrap();
-        let orginal_image = scale_matches.value_of("image").unwrap().to_string();
-        
-        // Scale image
-        let large_image = scale_image(orginal_image, scale_factor, sample_size);
-                
-        // Save Image
-        large_image.save("output.png");
+        let image_paths = scale_matches.values_of("input").unwrap();
+        let output = scale_matches.value_of("output").unwrap();
+
+
+        // Scale images
+        for image_path in image_paths {
+           
+            // Scale image
+            let large_image = scale_image(image_path, scale_factor, sample_size);
+
+            // Find position of /
+            let break_postion = image_path.rfind("/").unwrap();
+
+            // Get image name
+            let image_name = &image_path[break_postion..image_path.chars().count()];
+
+            // Save Image
+            large_image.save(output.to_string() + &image_name);
+        }
     }
 }
