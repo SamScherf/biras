@@ -32,3 +32,17 @@ subcommands:
                                 multiple: true
                                 help: These are the images that will be scaled up and smoothed out
                                 index: 1
+        - cut:
+                about: This cuts the image up
+                args:
+                        - output:
+                                short: o
+                                required: true
+                                long: output
+                                value_name: output
+                                help: Sets the folder where are the cut up images will be placed
+                                takes_value: true
+                        - input:
+                                required: true
+                                help: This is the image that will be cut up
+                                index: 1
