@@ -20,16 +20,25 @@ fn scale_image(image_path: &str, scale: u32, sample_size: u32) -> image::ImageBu
 
 
 fn get_file_name(file_path: &str) -> &str {
+    // Remove path from name
+    let break_postion = file_path.rfind("/");
+    let file_name;
+    if break_postion != None {
+        file_name = &file_path[break_postion.unwrap()+1..file_path.chars().count()];
+    } else {
+        file_name = file_path;
+    }
+    
+    // Remove extension from name
+    let extension_break_postion = file_name.rfind(".");
+    let extensionless_file_name;
+    if break_postion != None {
+        extensionless_file_name = &file_name[0..extension_break_postion.unwrap()];
+    } else {
+        extensionless_file_name = file_name;
+    }
 
-   // Check if file path is file name
-   let break_postion = file_path.rfind("/");
-   if break_postion == None {
-        return file_path
-   }
-
-   // Get file name
-   let file_name = &file_path[break_postion.unwrap()..file_path.chars().count()];
-   return file_name;
+    return extensionless_file_name;
 }
 
 
@@ -47,12 +56,10 @@ fn main() {
         // Get parameter values
         let image_path = scale_matches.value_of("input").unwrap();
         let output = scale_matches.value_of("output").unwrap();
+        let size = scale_matches.value_of("size").unwrap().parse::<u32>().unwrap();
 
         // Open Image
         let orginal_image = image::open(image_path).unwrap();
-
-        // Set size
-        let size = 64;
 
         // Get image name
         let image_name = get_file_name(image_path);
@@ -93,7 +100,7 @@ fn main() {
             let image_name = get_file_name(image_path);
 
             // Save Image
-            large_image.save(output.to_string() + &image_name);
+            large_image.save(output.to_string() + &image_name + ".png");
             println!("Saved image {}", image_name);
         }
     }

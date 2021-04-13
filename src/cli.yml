@@ -32,6 +32,13 @@ subcommands:
         - cut:
                 about: This cuts the image up
                 args:
+                       - size:
+                               short: s
+                               required: true
+                               long: size
+                               value_name: size
+                               help: Set the size of the cut up images
+                               takes_value: true
                        - input:
                                 required: true
                                 help: This is the image that will be cut up
