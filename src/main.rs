@@ -32,7 +32,7 @@ fn get_file_name(file_path: &str) -> &str {
     // Remove extension from name
     let extension_break_postion = file_name.rfind(".");
     let extensionless_file_name;
-    if break_postion != None {
+    if extension_break_postion != None {
         extensionless_file_name = &file_name[0..extension_break_postion.unwrap()];
     } else {
         extensionless_file_name = file_name;
