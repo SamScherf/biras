@@ -20,29 +20,23 @@ subcommands:
                                 value_name: median
                                 help: Sets the sample size to use when applying a median filter to smooth out a scaled out image
                                 takes_value: true
-                        - output:
-                                short: o
-                                required: true
-                                long: output
-                                value_name: output
-                                help: Sets the folder where are the scaled images will be placed
-                                takes_value: true
                         - input:
                                 required: true
                                 multiple: true
                                 help: These are the images that will be scaled up and smoothed out
                                 index: 1
+                        - output:
+                                required: true
+                                help: Sets the folder where are the scaled images will be placed
+                                index: 2
         - cut:
                 about: This cuts the image up
                 args:
-                        - output:
-                                short: o
-                                required: true
-                                long: output
-                                value_name: output
-                                help: Sets the folder where are the cut up images will be placed
-                                takes_value: true
-                        - input:
+                       - input:
                                 required: true
                                 help: This is the image that will be cut up
                                 index: 1
+                       - output:
+                                required: true
+                                help: Sets the folder where are the cut up images will be placed
+                                index: 2

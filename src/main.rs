@@ -90,6 +90,7 @@ fn main() {
 
             // Save Image
             large_image.save(output.to_string() + &image_name);
+            println!("Saved image {}", image_name);
         }
     }
 }
